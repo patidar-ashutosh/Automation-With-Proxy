@@ -1,4 +1,3 @@
-const axios = require('axios');
 const crypto = require('crypto');
 const generateUserAgent = require('./userAgents.js');
 
@@ -11,7 +10,7 @@ function shuffleArray(arr) {
 	return a;
 }
 
-async function generateFingerprint(proxyURL = '', browserName, deviceCategory) {
+async function generateFingerprint(browserName, deviceCategory) {
 	const screenProfiles = [
 		{ width: 1920, height: 1080 },
 		{ width: 1366, height: 768 },
@@ -41,16 +40,15 @@ async function generateFingerprint(proxyURL = '', browserName, deviceCategory) {
 		{ vendor: 'AMD', renderer: 'AMD Radeon Pro 560 OpenGL Engine' }
 	];
 
-	let timezone = 'UTC';
-	if (proxyURL && proxyURL.trim()) {
-		try {
-			const ip = proxyURL.replace(/^http(s)?:\/\//, '').split(':')[0];
-			const geo = await axios.get(`http://ip-api.com/json/${ip}`, { timeout: 5000 });
-			if (geo.data?.timezone) timezone = geo.data.timezone;
-		} catch (e) {
-			console.warn('⚠️ Timezone lookup failed:', e.message);
-		}
-	}
+	// Use random timezone instead of proxy-based detection
+	const timezones = [
+		'UTC',
+		'America/New_York',
+		'Europe/London',
+		'Asia/Tokyo',
+		'Australia/Sydney'
+	];
+	const timezone = timezones[Math.floor(Math.random() * timezones.length)];
 
 	const screen = screenProfiles[Math.floor(Math.random() * screenProfiles.length)];
 	const languages = languageProfiles[Math.floor(Math.random() * languageProfiles.length)];
@@ -99,7 +97,8 @@ async function generateFingerprint(proxyURL = '', browserName, deviceCategory) {
 			rtt: Math.floor(Math.random() * 100 + 20),
 			type: 'wifi'
 		},
-		maxTouchPoints: 0 // desktop
+		maxTouchPoints: deviceCategory === 'mobile' ? 5 : 0,
+		deviceScaleFactor: dpr
 	};
 }
 

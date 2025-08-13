@@ -5,22 +5,14 @@ const { runAutomation } = require('../automation');
 
 router.post('/', async (req, res) => {
 	try {
-		const {
-			blogURL,
-			ProxyURL,
-			browser,
-			openCount,
-			profilesAtOnce,
-			timeout,
-			minWaitTime,
-			maxWaitTime
-		} = req.body;
+		const { blogURL, browser, openCount, profilesAtOnce, timeout, minWaitTime, maxWaitTime } =
+			req.body;
 
 		// Input validation
-		if (!blogURL || !ProxyURL) {
+		if (!blogURL) {
 			return res.status(400).json({
 				success: false,
-				error: 'Missing blogURL or ProxyURL'
+				error: 'Missing blogURL'
 			});
 		}
 
@@ -83,14 +75,14 @@ router.post('/', async (req, res) => {
 			});
 		}
 
-		const combinedURL = ProxyURL + encodeURIComponent(blogURL);
-		// const combinedURL = 'https://getmodsapk.com/';
+		// Use the blog URL
+		const targetURL = blogURL;
 
 		// Send initial response
 		res.json({
 			success: true,
 			started: true,
-			url: combinedURL,
+			url: targetURL,
 			cycles,
 			profiles,
 			timeout: pageTimeout,
@@ -100,8 +92,7 @@ router.post('/', async (req, res) => {
 
 		// Run automation in background
 		runAutomation({
-			url: combinedURL,
-			proxyURL: ProxyURL,
+			url: targetURL,
 			browser,
 			openCount: cycles,
 			profilesAtOnce: profiles,

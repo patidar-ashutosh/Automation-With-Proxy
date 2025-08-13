@@ -46,15 +46,7 @@ function getCycleSpecificIndex(globalIndex, cycle, profilesPerCycle) {
 }
 
 // Function to process a single window
-async function processWindow(
-	windowIndex,
-	browser,
-	combinedURL,
-	proxyURL,
-	waitTime,
-	cycle,
-	timeout = 30
-) {
+async function processWindow(windowIndex, browser, targetURL, waitTime, cycle, timeout = 30) {
 	let browserInstance = null;
 	let context = null;
 	let page = null;
@@ -87,7 +79,7 @@ async function processWindow(
 			windowIndex
 		);
 
-		const fingerprint = await generateFingerprint(proxyURL, browserChoice.name, 'desktop');
+		const fingerprint = await generateFingerprint(browserChoice.name, 'desktop');
 		const userAgent = fingerprint.userAgent;
 
 		// Check if stop was requested before launching browser
@@ -168,7 +160,7 @@ async function processWindow(
 			log(`🌐 Loading website for Profile ${cycleSpecificIndex}...`, windowIndex);
 
 			// Navigate to the page with stop checking
-			const navigationPromise = page.goto(combinedURL, {
+			const navigationPromise = page.goto(targetURL, {
 				waitUntil: 'load',
 				timeout: timeout * 1000 // Convert seconds to milliseconds
 			});
@@ -382,7 +374,6 @@ async function processWindow(
 async function runAutomation(config) {
 	const {
 		url,
-		proxyURL,
 		browser = 'random',
 		openCount = 1,
 		profilesAtOnce = 1,
@@ -432,7 +423,6 @@ async function runAutomation(config) {
 				(cycle - 1) * profilesPerCycle + i + 1,
 				browser,
 				url,
-				proxyURL,
 				waitTimes[i],
 				cycle,
 				timeout

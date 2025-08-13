@@ -149,18 +149,6 @@
 				border: 1px solid rgba(76, 175, 80, 0.3);
 			}
 
-			#combinedURL {
-				background: rgba(0, 0, 0, 0.3);
-				color: #ff9800;
-				border: 1px solid rgba(255, 152, 0, 0.3);
-				font-family: 'Courier New', monospace;
-			}
-
-			#blogURL,
-			#ProxyURL {
-				color: #00ffd2;
-			}
-
 			/* Profile logs styles */
 			.profile-logs-container {
 				display: none;
@@ -652,6 +640,27 @@
 				font-size: 13px;
 				font-weight: 600;
 			}
+
+			.form-group {
+				margin-bottom: 20px;
+			}
+
+			.form-row {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+			}
+
+			@media (max-width: 768px) {
+				.form-row {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			#blogURL {
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+			}
 		</style>
 	</head>
 	<body>
@@ -660,57 +669,41 @@
 
 			<div class="form-container">
 				<form id="automationForm">
-					<label for="blogURL">Blog URL:</label>
-					<input
-						type="text"
-						name="blogURL"
-						id="blogURL"
-						value="https://dirtypagesblog.blogspot.com/2025/08/midnight-with-stranger-ultimate-one.html"
-						required
-					/>
+					<div class="form-group">
+						<label for="blogURL">Website URL:</label>
+						<input
+							type="url"
+							name="blogURL"
+							id="blogURL"
+							value="https://www.whatismyip.com/"
+							required
+						/>
+					</div>
 
-					<label for="ProxyURL">Proxy URL:</label>
-					<input
-						type="text"
-						name="ProxyURL"
-						id="ProxyURL"
-						value="http://api.scrape.do?token=6178e21ee1a84b90800c21bbd3ec590eff7c36fa576&url="
-						required
-					/>
+					<div class="form-row">
+						<div class="form-group">
+							<label for="browser">Browser:</label>
+							<select name="browser" id="browser">
+								<option value="random">Random</option>
+								<option value="chromium">Chromium</option>
+								<option value="firefox">Firefox</option>
+								<option value="webkit">Webkit</option>
+							</select>
+						</div>
 
-					<label for="combinedURL">Combined URL</label>
-					<textarea
-						id="combinedURL"
-						name="combinedURL"
-						disabled
-						style="
-							width: 100%;
-							font-family: monospace;
-							resize: vertical;
-							min-height: 100px;
-							max-height: 120px;
-							overflow: auto;
-						"
-					></textarea>
-
-					<label for="browser">Browser:</label>
-					<select name="browser" id="browser">
-						<option value="random">Random</option>
-						<option value="chromium">Chromium</option>
-						<option value="firefox">Firefox</option>
-						<option value="webkit">Webkit</option>
-					</select>
-
-					<label for="openCount">Time of Run Automation:</label>
-					<input
-						type="number"
-						name="openCount"
-						id="openCount"
-						min="1"
-						max="20"
-						value="3"
-						required
-					/>
+						<div class="form-group">
+							<label for="openCount">Number of Cycles:</label>
+							<input
+								type="number"
+								name="openCount"
+								id="openCount"
+								min="1"
+								max="20"
+								value="1"
+								required
+							/>
+						</div>
+					</div>
 
 					<label for="profilesAtOnce">Profiles at Once:</label>
 					<input
@@ -1152,16 +1145,6 @@
 				}
 			}
 
-			// Update combined URL field live
-			function updateCombinedURL() {
-				const blogURLValue = document.getElementById('blogURL').value;
-				const proxyURLValue = document.getElementById('ProxyURL').value;
-				document.getElementById('combinedURL').value =
-					proxyURLValue + encodeURIComponent(blogURLValue);
-			}
-			document.getElementById('blogURL').addEventListener('input', updateCombinedURL);
-			updateCombinedURL();
-
 			// Track current cycle for UI updates
 			let currentCycle = 1; // Initialize to 1 to match backend
 
@@ -1295,7 +1278,7 @@
 				const startContent = `
 					<p style="margin-bottom: 20px; color: #ff9800; font-weight: 600;">Please review your automation settings:</p>
 					<div class="data-item">
-						<span class="data-label">Blog URL:</span>
+						<span class="data-label">Website URL:</span>
 						<span class="data-value">${payload.blogURL}</span>
 					</div>
 					<div class="data-item">
