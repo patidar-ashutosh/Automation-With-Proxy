@@ -15,6 +15,49 @@ const {
 } = require('../utils/helpers');
 const injectFingerprint = require('../utils/injectFingerprint');
 
+// Proxy rotation system
+const proxyList = [
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495bsra-zone-custom-region-JP-sessid-FnV6vi48-sessTime-1',
+		password: 'DhMLInXa'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495bsra-zone-custom-region-JP-sessid-QFHuMLBA-sessTime-1',
+		password: 'DhMLInXa'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495bsra-zone-custom-region-JP-sessid-HNx9pjKy-sessTime-1',
+		password: 'DhMLInXa'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495bsra-zone-custom-region-JP-sessid-uRARyqsu-sessTime-1',
+		password: 'DhMLInXa'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495bsra-zone-custom-region-JP-sessid-Dd9oBOOf-sessTime-1',
+		password: 'DhMLInXa'
+	}
+];
+
+let currentProxyIndex = 0;
+
+// Function to get next proxy in rotation
+function getNextProxy() {
+	const proxy = proxyList[currentProxyIndex];
+	currentProxyIndex = (currentProxyIndex + 1) % proxyList.length;
+	return proxy;
+}
+
+// Function to get proxy by index (for specific profile assignment)
+function getProxyByIndex(index) {
+	return proxyList[index % proxyList.length];
+}
+
 const activeWindows = new Map();
 let totalWindows = 0;
 let completedWindows = 0;
@@ -90,7 +133,23 @@ async function processWindow(windowIndex, browser, targetURL, waitTime, cycle, t
 			return;
 		}
 
-		browserInstance = await browserChoice.launcher.launch({ headless: false });
+		// Get proxy for this specific profile
+		const proxyConfig = getProxyByIndex(windowIndex - 1); // Use windowIndex - 1 to start from 0
+
+		log(
+			`🌐 Using proxy: ${proxyConfig.username} for Profile ${cycleSpecificIndex}`,
+			windowIndex
+		);
+
+		// browserInstance = await browserChoice.launcher.launch({ headless: false });
+		browserInstance = await browserChoice.launcher.launch({
+			headless: false,
+			proxy: {
+				server: proxyConfig.server,
+				username: proxyConfig.username,
+				password: proxyConfig.password
+			}
+		});
 
 		// Check if stop was requested after browser launch
 		if (shouldStop) {
@@ -211,7 +270,8 @@ async function processWindow(windowIndex, browser, targetURL, waitTime, cycle, t
 				browserInstance,
 				startTime: Date.now(), // Timer starts NOW, after page load
 				waitTime,
-				cycle
+				cycle,
+				proxy: proxyConfig.username // Track which proxy is being used
 			});
 
 			log(`⏱️ Wait timer started (${waitTime}s allocated)`, windowIndex);
@@ -504,7 +564,8 @@ function getStatus() {
 			elapsed: Math.round(elapsed),
 			remaining,
 			waitTime: data.waitTime,
-			cycle: data.cycle
+			cycle: data.cycle,
+			proxy: data.proxy // Include proxy information in status
 		};
 	});
 

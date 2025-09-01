@@ -1,3 +1,14 @@
+    let timezone = 'UTC';
+    if (proxyURL && proxyURL.trim()) {
+    	try {
+    		const ip = proxyURL.replace(/^http(s)?:\/\//, '').split(':')[0];
+    		const geo = await axios.get(`http://ip-api.com/json/${ip}`, { timeout: 5000 });
+    		if (geo.data?.timezone) timezone = geo.data.timezone;
+    	} catch (e) {
+    		console.warn('⚠️ Timezone lookup failed:', e.message);
+    	}
+    }
+
 add a country selection opetion
 
 Add mobile emulation (iPhone, Android)
