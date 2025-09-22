@@ -40,8 +40,6 @@ function mapBrowserName(engineName) {
 			return 'Chrome';
 		case 'firefox':
 			return 'Firefox';
-		case 'webkit':
-			return 'Safari';
 		default:
 			return engineName; // fallback to original name if unknown
 	}

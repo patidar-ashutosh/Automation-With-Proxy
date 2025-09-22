@@ -166,8 +166,7 @@ function shuffleArray(arr) {
 function getRandomBrowser() {
 	const browsers = [
 		{ name: 'chromium', launcher: chromium },
-		{ name: 'firefox', launcher: firefox },
-		{ name: 'webkit', launcher: webkit }
+		{ name: 'firefox', launcher: firefox }
 	];
 	return browsers[Math.floor(Math.random() * browsers.length)];
 }
@@ -178,8 +177,6 @@ function getBrowserByName(name) {
 			return { name: 'chromium', launcher: chromium };
 		case 'firefox':
 			return { name: 'firefox', launcher: firefox };
-		case 'webkit':
-			return { name: 'webkit', launcher: webkit };
 		default:
 			return null;
 	}

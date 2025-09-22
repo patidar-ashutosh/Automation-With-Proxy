@@ -17,30 +17,54 @@ const injectFingerprint = require('../utils/injectFingerprint');
 
 // Proxy rotation system
 const proxyList = [
+	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
+	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
+	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
+	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
+	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' }
+
 	{
 		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-FnV6vi48-sessTime-1',
-		password: 'DhMLInXa'
+		username: '70753495bsra-zone-custom-region-ID-sessid-rWbQWBFB-sessTime-1',
+		password: 'DhMLInXa',
+		region: 'ID'
 	},
 	{
 		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-QFHuMLBA-sessTime-1',
-		password: 'DhMLInXa'
+		username: '70753495bsra-zone-custom-region-HK-sessid-wcuwKhZq-sessTime-1',
+		password: 'DhMLInXa',
+		region: 'HK'
+	},
+
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495bsra-zone-custom-region-JP-sessid-um4A6sMo-sessTime-1',
+		password: 'DhMLInXa',
+		region: 'JP'
 	},
 	{
 		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-HNx9pjKy-sessTime-1',
-		password: 'DhMLInXa'
+		username: '70753495bsra-zone-custom-region-JP-sessid-FmeiDcr1-sessTime-1',
+		password: 'DhMLInXa',
+		region: 'JP'
 	},
 	{
 		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-uRARyqsu-sessTime-1',
-		password: 'DhMLInXa'
+		username: '70753495bsra-zone-custom-region-JP-sessid-DFZ4RMNI-sessTime-1',
+		password: 'DhMLInXa',
+		region: 'JP'
 	},
 	{
 		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-Dd9oBOOf-sessTime-1',
-		password: 'DhMLInXa'
+		username: '70753495bsra-zone-custom-region-ID-sessid-bbOg5KEW-sessTime-1',
+		password: 'DhMLInXa',
+		region: 'ID'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495bsra-zone-custom-region-ID-sessid-OyJay3fY-sessTime-1',
+		password: 'DhMLInXa',
+		region: 'ID'
 	}
 ];
 
@@ -143,7 +167,7 @@ async function processWindow(windowIndex, browser, targetURL, waitTime, cycle, t
 
 		// browserInstance = await browserChoice.launcher.launch({ headless: false });
 		browserInstance = await browserChoice.launcher.launch({
-			headless: false,
+			headless: true,
 			proxy: {
 				server: proxyConfig.server,
 				username: proxyConfig.username,
