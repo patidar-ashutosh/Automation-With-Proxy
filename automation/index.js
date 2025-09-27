@@ -469,7 +469,7 @@ async function runAutomation(config) {
 	// Clear previous profile logs
 	clearProfileLogs();
 
-	const totalCycles = Math.max(1, Math.min(parseInt(openCount), 20));
+	const totalCycles = Math.max(1, Math.min(parseInt(openCount), 50));
 	profilesPerCycle = Math.max(1, Math.min(parseInt(profilesAtOnce), 10));
 
 	totalWindows = totalCycles * profilesPerCycle;
