@@ -33,10 +33,10 @@ router.post('/', async (req, res) => {
 		const minWait = parseInt(minWaitTime) || 45;
 		const maxWait = parseInt(maxWaitTime) || 55;
 
-		if (cycles < 1 || cycles > 50) {
+		if (cycles < 1 || cycles > 500) {
 			return res.status(400).json({
 				success: false,
-				error: 'openCount must be between 1 and 50'
+				error: 'openCount must be between 1 and 500'
 			});
 		}
 

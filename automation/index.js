@@ -17,53 +17,34 @@ const injectFingerprint = require('../utils/injectFingerprint');
 
 // Proxy rotation system
 const proxyList = [
-	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
-	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
-	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
-	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' },
-	// { server: 'f.proxys5.net:6280', username: '70753495bsra-zone-custom', password: 'DhMLInXa' }
-
 	{
 		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-ID-sessid-rWbQWBFB-sessTime-1',
-		password: 'DhMLInXa',
+		username: '70753495-zone-custom-region-CA-sessid-h1tnD0f3-sessTime-1',
+		password: 'OGO6VOEv',
+		region: 'CA'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495-zone-custom-region-CA-sessid-Uhx74Nw2-sessTime-1',
+		password: 'OGO6VOEv',
+		region: 'CA'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495-zone-custom-region-CA-sessid-8qeNcoVp-sessTime-1',
+		password: 'OGO6VOEv',
+		region: 'CA'
+	},
+	{
+		server: 'f.proxys5.net:6280',
+		username: '70753495-zone-custom-region-ID-sessid-mJqvCc6K-sessTime-1',
+		password: 'OGO6VOEv',
 		region: 'ID'
 	},
 	{
 		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-HK-sessid-wcuwKhZq-sessTime-1',
-		password: 'DhMLInXa',
-		region: 'HK'
-	},
-
-	{
-		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-um4A6sMo-sessTime-1',
-		password: 'DhMLInXa',
-		region: 'JP'
-	},
-	{
-		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-FmeiDcr1-sessTime-1',
-		password: 'DhMLInXa',
-		region: 'JP'
-	},
-	{
-		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-JP-sessid-DFZ4RMNI-sessTime-1',
-		password: 'DhMLInXa',
-		region: 'JP'
-	},
-	{
-		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-ID-sessid-bbOg5KEW-sessTime-1',
-		password: 'DhMLInXa',
-		region: 'ID'
-	},
-	{
-		server: 'f.proxys5.net:6280',
-		username: '70753495bsra-zone-custom-region-ID-sessid-OyJay3fY-sessTime-1',
-		password: 'DhMLInXa',
+		username: '70753495-zone-custom-region-ID-sessid-EewNcMDU-sessTime-1',
+		password: 'OGO6VOEv',
 		region: 'ID'
 	}
 ];
@@ -167,7 +148,7 @@ async function processWindow(windowIndex, browser, targetURL, waitTime, cycle, t
 
 		// browserInstance = await browserChoice.launcher.launch({ headless: false });
 		browserInstance = await browserChoice.launcher.launch({
-			headless: true,
+			headless: false,
 			proxy: {
 				server: proxyConfig.server,
 				username: proxyConfig.username,
@@ -469,7 +450,7 @@ async function runAutomation(config) {
 	// Clear previous profile logs
 	clearProfileLogs();
 
-	const totalCycles = Math.max(1, Math.min(parseInt(openCount), 50));
+	const totalCycles = Math.max(1, Math.min(parseInt(openCount), 500));
 	profilesPerCycle = Math.max(1, Math.min(parseInt(profilesAtOnce), 10));
 
 	totalWindows = totalCycles * profilesPerCycle;
