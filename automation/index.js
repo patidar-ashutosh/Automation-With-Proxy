@@ -168,7 +168,7 @@ async function processWindow(windowIndex, browser, targetURL, waitTime, cycle, t
 
 		// browserInstance = await browserChoice.launcher.launch({ headless: false });
 		browserInstance = await browserChoice.launcher.launch({
-			headless: false,
+			headless: true,
 			proxy: {
 				server: proxyConfig.server,
 				username: proxyConfig.username,
