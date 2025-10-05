@@ -18,28 +18,53 @@ const injectFingerprint = require('../utils/injectFingerprint');
 // Proxy rotation system
 const proxyList = [
 	{
-		server: 'ea.proxys5.net:6200',
-		username: '70753495-zone-custom-region-CA-sessid-l2nDzimf-sessTime-1',
+		server: 'na.proxys5.net:6200',
+		username: '70753495-zone-custom-sessid-9Gh4vpVa-sessTime-1',
 		password: 'OGO6VOEv'
 	},
 	{
 		server: 'na.proxys5.net:6200',
-		username: '70753495-zone-custom-region-US-sessid-FfeQrGpq-sessTime-1',
+		username: '70753495-zone-custom-sessid-h7KVJbeE-sessTime-1',
 		password: 'OGO6VOEv'
 	},
 	{
 		server: 'na.proxys5.net:6200',
-		username: '70753495-zone-custom-region-US-sessid-EudUy713-sessTime-1',
+		username: '70753495-zone-custom-sessid-Cp8ldNhQ-sessTime-1',
 		password: 'OGO6VOEv'
 	},
 	{
 		server: 'as.proxys5.net:6200',
-		username: '70753495-zone-custom-region-AU-sessid-PdoANVBo-sessTime-1',
+		username: '70753495-zone-custom-region-AU-sessid-4i6oz1Wq-sessTime-1',
 		password: 'OGO6VOEv'
 	},
 	{
-		server: 'as.proxys5.net',
-		username: '70753495-zone-custom-region-AU-sessid-hQNfYyGK-sessTime-1',
+		server: 'as.proxys5.net:6200',
+		username: '70753495-zone-custom-region-AU-sessid-NlMjwrzH-sessTime-1',
+		password: 'OGO6VOEv'
+	},
+	{
+		server: 'as.proxys5.net:6200',
+		username: '70753495-zone-custom-region-AU-sessid-HceVUxjr-sessTime-1',
+		password: 'OGO6VOEv'
+	},
+	{
+		server: 'ea.proxys5.net:6200',
+		username: '70753495-zone-custom-region-CA-sessid-OJotFKHv-sessTime-1',
+		password: 'OGO6VOEv'
+	},
+	{
+		server: 'ea.proxys5.net:6200',
+		username: '70753495-zone-custom-region-CA-sessid-XpgoC1np-sessTime-1',
+		password: 'OGO6VOEv'
+	},
+	{
+		server: 'ea.proxys5.net:6200',
+		username: '70753495-zone-custom-region-CA-sessid-gqzWzPiI-sessTime-1',
+		password: 'OGO6VOEv'
+	},
+	{
+		server: 'ea.proxys5.net:6200',
+		username: '70753495-zone-custom-region-CA-sessid-lTWk1WRL-sessTime-1',
 		password: 'OGO6VOEv'
 	}
 ];
